@@ -1,0 +1,126 @@
+version: '3.9'
+
+# GPU cluster compose file
+# This defines two services: one for NVIDIA GPUs and one for AMD (ROCm) GPUs.
+# IMPORTANT:
+# 1. Host GPU drivers must be installed on the host OS (Windows) or via WSL2 with proper passthrough.
+#    You cannot reliably install and use vendor kernel drivers inside a container.
+# 2. For NVIDIA: Install latest Windows driver + WSL2 NVIDIA CUDA support, and install nvidia-container-toolkit inside WSL2 Docker if using WSL.
+# 3. For AMD (ROCm): ROCm support is primarily for Linux; Windows ROCm containers are not officially supported. Consider using a Linux host or WSL2 Ubuntu with experimental passthrough.
+# 4. GTX 650 GPUs are Kepler architecture; modern CUDA images may drop support. You may need older CUDA base images (e.g. nvidia/cuda:11.4.0-base-ubuntu20.04) if compatibility issues arise.
+# 5. AMD Radeon 6700 XT (RDNA2) is not officially supported by ROCm at this time for compute workloads; you will have limited or no ROCm functionality. OpenCL via Mesa/ROCm or hipSYCL alternatives may be required.
+#
+# Adjust image tags to suitable versions you validate on your environment.
+
+services:
+  # API Gateway / Orchestrator (FastAPI) - build locally, CPU only
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    image: local/api-gateway:latest
+    container_name: api-gateway
+    profiles: [cpu]
+    depends_on:
+      - ollama-amd
+    environment:
+      - MODEL_PHI3_ENDPOINT=http://ollama-amd:11434
+      - RAY_HEAD_ADDR=ray-head:6379
+      # Optional Mistral endpoint (only when GPU profile active)
+      - MODEL_MISTRAL_ENDPOINT=http://mistral-vllm:8000
+    ports:
+      - "8080:8080"
+    volumes:
+      - model-cache:/models
+
+  # NVIDIA Node hosting vLLM for Mistral-7B (adjust image to GPU compatible version)
+  mistral-vllm:
+    image: vllm/vllm-openai:latest
+    container_name: mistral-vllm
+    profiles: [gpu]
+    # GPU reservations removed for local CPU build; enable on Ubuntu server by adding device requests.
+    # Example (server only):
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 3
+    #           capabilities: [gpu]
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - HF_MODEL_ID=mistral-7b-instruct-v0.2
+      - VLLM_WORKER_USE_RAY=0
+    command: ["bash", "-c", "python -m vllm.entrypoints.openai.api_server --model $HF_MODEL_ID --host 0.0.0.0 --port 8000"]
+    ports:
+      - "8000:8000"
+    volumes:
+      - model-cache:/models
+    # Optionally: runtime: nvidia
+
+  # AMD Node running Ollama for Phi-3 Mini (NOTE: AMD GPU acceleration may be limited)
+  ollama-amd:
+    image: ollama/ollama:latest
+    container_name: ollama-amd
+    profiles: [cpu]
+    # devices:
+    #   - /dev/dri:/dev/dri  # Enable on Linux host with AMD GPU.
+    environment:
+      - OLLAMA_ORIGINS=*
+    entrypoint: ["bash","-c","/bin/ollama serve & sleep 4 && ollama pull phi3:mini && tail -f /dev/null"]
+    ports:
+      - "11434:11434"
+    volumes:
+      - model-cache:/root/.ollama
+      - amd-work:/workspace
+    # privileged: true  # Uncomment if required for GPU access
+
+  # Ray Head for coordination
+  ray-head:
+    image: rayproject/ray:latest-py311
+    container_name: ray-head
+    profiles: [cpu]
+    command: ["bash","-c","ray start --head --port=6379 --dashboard-host=0.0.0.0 --dashboard-port=8265 && tail -f /dev/null"]
+    ports:
+      - "8265:8265"
+    volumes:
+      - ray-data:/data
+
+  # Ray Worker (can be scaled)
+  ray-worker:
+    image: rayproject/ray:latest-py311
+    container_name: ray-worker
+    profiles: [cpu]
+    depends_on:
+      - ray-head
+    command: ["bash","-c","ray start --address=ray-head:6379 && tail -f /dev/null"]
+    volumes:
+      - ray-data:/data
+    deploy:
+      replicas: 1
+
+  # Simple storage service (NFS placeholder using local volume export via nginx)
+  storage:
+    image: nginx:alpine
+    container_name: storage
+    profiles: [cpu]
+    volumes:
+      - model-cache:/usr/share/nginx/html/models:ro
+    ports:
+      - "8090:80"
+    # This is a placeholder; replace with true NAS/NFS in production.
+
+volumes:
+  nvidia-work: # legacy (if needed)
+  amd-work:
+  model-cache:
+  ray-data:
+
+# USAGE (PowerShell):
+# Build API Gateway image (CPU only):
+# docker compose -f cluster/gpu-cluster.yml build api-gateway
+# Start CPU profile services (gateway + ray + ollama + storage):
+# docker compose -f cluster/gpu-cluster.yml --profile cpu up -d
+# Start GPU services later on Ubuntu server:
+# docker compose -f cluster/gpu-cluster.yml --profile gpu up -d
+# Test: curl http://localhost:8080/health
