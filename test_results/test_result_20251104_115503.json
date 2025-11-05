@@ -1,0 +1,10 @@
+{
+  "test_info": {
+    "timestamp": "2025-11-04T11:55:03-08:00",
+    "host": "gpu-cluster",
+    "script_version": "1.0"
+  },
+  "service_health": {},
+  "model_tests": [],
+  "performance_summary": {}
+}

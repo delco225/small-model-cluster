@@ -1,16 +1,24 @@
-version: '3.9'
-
-# GPU cluster compose file
-# This defines two services: one for NVIDIA GPUs and one for AMD (ROCm) GPUs.
-# IMPORTANT:
-# 1. Host GPU drivers must be installed on the host OS (Windows) or via WSL2 with proper passthrough.
-#    You cannot reliably install and use vendor kernel drivers inside a container.
-# 2. For NVIDIA: Install latest Windows driver + WSL2 NVIDIA CUDA support, and install nvidia-container-toolkit inside WSL2 Docker if using WSL.
-# 3. For AMD (ROCm): ROCm support is primarily for Linux; Windows ROCm containers are not officially supported. Consider using a Linux host or WSL2 Ubuntu with experimental passthrough.
-# 4. GTX 650 GPUs are Kepler architecture; modern CUDA images may drop support. You may need older CUDA base images (e.g. nvidia/cuda:11.4.0-base-ubuntu20.04) if compatibility issues arise.
-# 5. AMD Radeon 6700 XT (RDNA2) is not officially supported by ROCm at this time for compute workloads; you will have limited or no ROCm functionality. OpenCL via Mesa/ROCm or hipSYCL alternatives may be required.
+# GPU cluster compose file - STRICT GPU ONLY
+# Updated for hardware inventory:
+#   - 4 x NVIDIA GTX 1650 SUPER (Turing, 4GB VRAM each -> ~16GB aggregate)
+#   - 1 x AMD RX 6700 XT (RDNA2, 12GB VRAM; no official ROCm support, limited acceleration)
 #
-# Adjust image tags to suitable versions you validate on your environment.
+# Strategy:
+#   - Run ALL models STRICTLY on GPUs - NO CPU FALLBACK
+#   - Run a quantized 8B class model (Llama 3 8B Instruct) under vLLM using all four NVIDIA GPUs.
+#   - Keep Mistral 7B as lighter option on NVIDIA GPUs.
+#   - Run Phi-3 Mini via Ollama on AMD GPU with strict GPU acceleration.
+#   - Expose new LLAMA model endpoint to api-gateway for selection (prefer=llama).
+#
+# IMPORTANT:
+# 1. Host GPU drivers (NVIDIA) + nvidia-container-toolkit must be installed on the Linux host (preferred) or WSL2.
+# 2. AMD RX 6700 XT: ROCm support required for GPU acceleration.
+# 3. Quantization: pulling an already quantized model (e.g. 4-bit / AWQ) dramatically reduces VRAM; adjust HF_MODEL_ID or provide local weights.
+# 4. vLLM multi-GPU: we rely on CUDA_VISIBLE_DEVICES exposing 4 GPUs; set deploy.resources.devices.count: 4.
+# 5. If GPUs enumerate differently, adjust NVIDIA_VISIBLE_DEVICES or device IDs.
+#
+# NOTE: For 4x 4GB cards you MUST use 4-bit or 8-bit quantized weights for 8B models; full FP16 won't fit.
+# CRITICAL: All model services require GPU access - NO CPU FALLBACK ALLOWED
 
 services:
   # API Gateway / Orchestrator (FastAPI) - build locally, CPU only
@@ -20,77 +28,118 @@ services:
       dockerfile: Dockerfile
     image: local/api-gateway:latest
     container_name: api-gateway
-    profiles: [cpu]
+    profiles: [gpu]  # <-- CHANGED: GPU profile only - no CPU fallback
+    # Hard dependency on GPU-accelerated Ollama services
     depends_on:
       - ollama-amd
+      - mistral-ollama
+      - llama-ollama
     environment:
       - MODEL_PHI3_ENDPOINT=http://ollama-amd:11434
       - RAY_HEAD_ADDR=ray-head:6379
-      # Optional Mistral endpoint (only when GPU profile active)
-      - MODEL_MISTRAL_ENDPOINT=http://mistral-vllm:8000
+      # Mistral endpoint via Ollama (GPU profile)
+      - MODEL_MISTRAL_ENDPOINT=http://mistral-ollama:11434
+      # Llama endpoint via Ollama (GPU profile)
+      - MODEL_LLAMA_ENDPOINT=http://llama-ollama:11434
+      # Model identifiers for Ollama
+      - MISTRAL_MODEL=mistral:7b-instruct
+      - LLAMA_MODEL=llama3.2:3b
+      - PHI3_MODEL=phi3:mini
+      # Generation defaults (tunable)
+      - GEN_MAX_TOKENS=640
+      - GEN_TEMPERATURE=0.7
     ports:
       - "8080:8080"
     volumes:
       - model-cache:/models
 
-  # NVIDIA Node hosting vLLM for Mistral-7B (adjust image to GPU compatible version)
-  mistral-vllm:
-    image: vllm/vllm-openai:latest
-    container_name: mistral-vllm
-    profiles: [gpu]
-    # GPU reservations removed for local CPU build; enable on Ubuntu server by adding device requests.
-    # Example (server only):
-    # deploy:
-    #   resources:
-    #     reservations:
-    #       devices:
-    #         - driver: nvidia
-    #           count: 3
-    #           capabilities: [gpu]
-    environment:
-      - NVIDIA_VISIBLE_DEVICES=all
-      - HF_MODEL_ID=mistral-7b-instruct-v0.2
-      - VLLM_WORKER_USE_RAY=0
-    command: ["bash", "-c", "python -m vllm.entrypoints.openai.api_server --model $HF_MODEL_ID --host 0.0.0.0 --port 8000"]
-    ports:
-      - "8000:8000"
-    volumes:
-      - model-cache:/models
-    # Optionally: runtime: nvidia
-
-  # AMD Node running Ollama for Phi-3 Mini (NOTE: AMD GPU acceleration may be limited)
-  ollama-amd:
+  # Ollama service for Mistral model (NVIDIA GPU ONLY)
+  mistral-ollama:
     image: ollama/ollama:latest
+    container_name: mistral-ollama
+    profiles: [gpu]
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=0,1  # Use first two NVIDIA GPUs
+      - OLLAMA_ORIGINS=*
+      - OLLAMA_GPU_LAYERS=999  # Force all layers to GPU
+    entrypoint: ["bash", "-c", "/bin/ollama serve & sleep 10 && ollama pull mistral:7b-instruct && tail -f /dev/null"]
+    ports:
+      - "8000:11434"
+    volumes:
+      - model-cache-mistral:/root/.ollama
+      - mistral-work:/workspace
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 2
+              capabilities: [gpu]
+
+  # Ollama service for Llama model (NVIDIA GPU ONLY)
+  llama-ollama:
+    image: ollama/ollama:latest
+    container_name: llama-ollama
+    profiles: [gpu]
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=2,3  # Use last two NVIDIA GPUs
+      - OLLAMA_ORIGINS=*
+      - OLLAMA_GPU_LAYERS=999  # Force all layers to GPU
+    entrypoint: ["bash", "-c", "/bin/ollama serve & sleep 10 && ollama pull llama3.2:3b && tail -f /dev/null"]
+    ports:
+      - "8001:11434"
+    volumes:
+      - model-cache-llama:/root/.ollama
+      - llama-work:/workspace
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 2
+              capabilities: [gpu]
+
+  # AMD Node running Ollama for Phi-3 Mini (AMD GPU ONLY - NO CPU FALLBACK)
+  ollama-amd:
+    image: ollama/ollama:rocm  # Use ROCm-enabled image for AMD GPU
     container_name: ollama-amd
-    profiles: [cpu]
-    # devices:
-    #   - /dev/dri:/dev/dri  # Enable on Linux host with AMD GPU.
+    profiles: [gpu]  # <-- GPU ONLY - NO CPU PROFILE
+    devices:
+      - /dev/dri:/dev/dri  # Enable AMD GPU access
+      - /dev/kfd:/dev/kfd  # Enable ROCm kernel fusion driver
     environment:
       - OLLAMA_ORIGINS=*
+      - HSA_OVERRIDE_GFX_VERSION=10.3.0  # Override for RX 6700 XT compatibility
+      - OLLAMA_GPU_LAYERS=999  # Force all layers to GPU
+      - ROC_ENABLE_PRE_VEGA=1
     entrypoint: ["bash","-c","/bin/ollama serve & sleep 4 && ollama pull phi3:mini && tail -f /dev/null"]
     ports:
       - "11434:11434"
     volumes:
       - model-cache:/root/.ollama
       - amd-work:/workspace
-    # privileged: true  # Uncomment if required for GPU access
+    privileged: true  # Required for AMD GPU access
+    group_add:
+      - video
 
-  # Ray Head for coordination
+  # Ray Head for coordination (GPU cluster only)
   ray-head:
     image: rayproject/ray:latest-py311
     container_name: ray-head
-    profiles: [cpu]
+    profiles: [gpu]  # <-- GPU ONLY - NO CPU PROFILE
     command: ["bash","-c","ray start --head --port=6379 --dashboard-host=0.0.0.0 --dashboard-port=8265 && tail -f /dev/null"]
     ports:
       - "8265:8265"
     volumes:
       - ray-data:/data
 
-  # Ray Worker (can be scaled)
+  # Ray Worker (can be scaled) - GPU cluster only
   ray-worker:
     image: rayproject/ray:latest-py311
     container_name: ray-worker
-    profiles: [cpu]
+    profiles: [gpu]  # <-- GPU ONLY - NO CPU PROFILE
     depends_on:
       - ray-head
     command: ["bash","-c","ray start --address=ray-head:6379 && tail -f /dev/null"]
@@ -103,24 +152,32 @@ services:
   storage:
     image: nginx:alpine
     container_name: storage
-    profiles: [cpu]
+    profiles: [gpu]  # <-- GPU ONLY - NO CPU PROFILE
     volumes:
       - model-cache:/usr/share/nginx/html/models:ro
     ports:
       - "8090:80"
-    # This is a placeholder; replace with true NAS/NFS in production.
+    # This is a placeholder; replace with true NFS/NFS in production.
 
 volumes:
   nvidia-work: # legacy (if needed)
   amd-work:
   model-cache:
+  model-cache-mistral:
+  model-cache-llama:
+  mistral-work:
+  llama-work:
   ray-data:
 
-# USAGE (PowerShell):
-# Build API Gateway image (CPU only):
+# USAGE (GPU ONLY - NO CPU FALLBACK):
+# Prerequisites:
+# 1. Install NVIDIA Container Toolkit: sudo apt install nvidia-container-toolkit
+# 2. Install ROCm for AMD GPU: https://rocmdocs.amd.com/en/latest/deploy/linux/quick_start.html
+# 3. Restart Docker daemon: sudo systemctl restart docker
+#
+# Build API Gateway image:
 # docker compose -f cluster/gpu-cluster.yml build api-gateway
-# Start CPU profile services (gateway + ray + ollama + storage):
-# docker compose -f cluster/gpu-cluster.yml --profile cpu up -d
-# Start GPU services later on Ubuntu server:
+# Start ALL services in GPU mode ONLY (no CPU fallback):
 # docker compose -f cluster/gpu-cluster.yml --profile gpu up -d
+# Monitor GPU usage: nvidia-smi (NVIDIA) or rocm-smi (AMD)
 # Test: curl http://localhost:8080/health
