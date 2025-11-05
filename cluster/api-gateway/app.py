@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException, Request
-import os, requests, uuid, time, resource
+import os, requests, uuid, time, resource, json
 from typing import Dict, List, Deque
 from collections import deque
 
@@ -47,28 +47,39 @@ def call_model(prompt: str, prefer: str = None, max_tokens: int = None, temperat
         max_tokens = GEN_MAX_TOKENS_DEFAULT
     if temperature is None:
         temperature = GEN_TEMP_DEFAULT
-    mistral = os.getenv('MODEL_MISTRAL_ENDPOINT')  # e.g. http://mistral-vllm:8000
-    phi3 = os.getenv('MODEL_PHI3_ENDPOINT')        # e.g. http://ollama-amd:11434
+    mistral = os.getenv('MODEL_MISTRAL_ENDPOINT')   # e.g. http://mistral-vllm:8000
+    phi3 = os.getenv('MODEL_PHI3_ENDPOINT')         # e.g. http://ollama-amd:11434
+    llama = os.getenv('MODEL_LLAMA_ENDPOINT')       # e.g. http://llama-vllm:8001
     attempts = []
     def add_mistral():
         if mistral:
-            attempts.append(('mistral', f"{mistral}/v1/completions", {
-                'model': os.getenv('MISTRAL_MODEL', 'mistral-7b-instruct-v0.2'),
+            attempts.append(('mistral', f"{mistral}/api/generate", {
+                'model': os.getenv('MISTRAL_MODEL', 'mistral:7b-instruct'),
                 'prompt': prompt,
-                'max_tokens': max_tokens,
-                'temperature': temperature
+                'stream': False,
+                'options': {'temperature': temperature, 'num_predict': max_tokens}
             }))
     def add_phi3():
         if phi3:
             attempts.append(('phi3', f"{phi3}/api/generate", {
                 'model': os.getenv('PHI3_MODEL', 'phi3:mini'),
                 'prompt': prompt,
+                'stream': False,
+                'options': {'temperature': temperature, 'num_predict': max_tokens}
+            }))
+    def add_llama():
+        if llama:
+            attempts.append(('llama', f"{llama}/api/generate", {
+                'model': os.getenv('LLAMA_MODEL', 'llama3.2:3b'),
+                'prompt': prompt,
+                'stream': False,
                 'options': {'temperature': temperature, 'num_predict': max_tokens}
             }))
     if prefer == 'mistral': add_mistral()
     if prefer == 'phi3': add_phi3()
+    if prefer == 'llama': add_llama()
     if prefer is None:
-        add_mistral(); add_phi3()
+        add_mistral(); add_llama(); add_phi3()
     errors = []
     for name, url, payload in attempts:
         t0 = time.time()
@@ -76,17 +87,24 @@ def call_model(prompt: str, prefer: str = None, max_tokens: int = None, temperat
             r = requests.post(url, json=payload, timeout=180)
             latency_ms = (time.time() - t0) * 1000.0
             if r.ok:
-                data = r.json()
-                if name == 'mistral' and 'choices' in data:
-                    txt = ''.join(choice.get('text','') for choice in data['choices']).strip()
-                    return {'model': name, 'text': txt, 'raw': data, 'latency_ms': round(latency_ms,2)}
-                if name == 'phi3':
-                    txt = data.get('response') or data.get('generated_text') or data.get('text') or ''
-                    if not txt and isinstance(data, dict) and data.get('done') is False:
-                        txt = str(data)
-                    return {'model': name, 'text': txt.strip(), 'raw': data, 'latency_ms': round(latency_ms,2)}
-                generic = data.get('generated_text') or data.get('response') or data.get('text') or str(data)
-                return {'model': name, 'text': generic.strip(), 'raw': data, 'latency_ms': round(latency_ms,2)}
+                # Handle Ollama non-streaming response (stream: false)
+                if name in ('mistral','llama','phi3'):
+                    try:
+                        data = r.json()
+                        final_response = data.get('response', '')
+                        if final_response:
+                            return {'model': name, 'text': final_response.strip(), 'raw': data, 'latency_ms': round(latency_ms,2)}
+                    except json.JSONDecodeError:
+                        errors.append({'model': name, 'error': 'Invalid JSON response'})
+                        continue
+                
+                # Fallback for other formats
+                try:
+                    data = r.json()
+                    generic = data.get('generated_text') or data.get('response') or data.get('text') or str(data)
+                    return {'model': name, 'text': generic.strip(), 'raw': data, 'latency_ms': round(latency_ms,2)}
+                except json.JSONDecodeError:
+                    return {'model': name, 'text': r.text.strip(), 'raw': {'response': r.text}, 'latency_ms': round(latency_ms,2)}
             else:
                 errors.append({'model': name, 'status': r.status_code, 'body': r.text[:300]})
         except Exception as e:
@@ -167,16 +185,22 @@ def gen_mistral(prompt: str, max_tokens: int = None, temperature: float = None):
     if max_tokens is None: max_tokens = GEN_MAX_TOKENS_DEFAULT
     if temperature is None: temperature = GEN_TEMP_DEFAULT
     payload = {
-        'model': os.getenv('MISTRAL_MODEL', 'mistral-7b-instruct-v0.2'),
+        'model': os.getenv('MISTRAL_MODEL', 'mistral:7b-instruct'),
         'prompt': prompt,
-        'max_tokens': max_tokens,
-        'temperature': temperature
+        'stream': False,
+        'options': {'temperature': temperature, 'num_predict': max_tokens}
     }
-    t0 = time.time(); r = requests.post(f"{endpoint}/v1/completions", json=payload); latency_ms = (time.time()-t0)*1000
+    t0 = time.time(); r = requests.post(f"{endpoint}/api/generate", json=payload); latency_ms = (time.time()-t0)*1000
     if not r.ok:
         return {'status_code': r.status_code, 'text': r.text[:500]}
-    data = r.json(); text = ''.join(c.get('text','') for c in data.get('choices', []))
-    return {'model': 'mistral', 'text': text.strip(), 'raw': data, 'latency_ms': round(latency_ms,2)}
+    
+    # Parse non-streaming response (stream: false)
+    try:
+        data = r.json()
+        final_text = data.get('response', '')
+        return {'model': 'mistral', 'text': final_text.strip(), 'raw': data, 'latency_ms': round(latency_ms,2)}
+    except json.JSONDecodeError:
+        return {'error': 'Invalid JSON response', 'text': r.text[:500]}
 
 @app.get('/generate/phi3')
 def gen_phi3(prompt: str, max_tokens: int = None, temperature: float = None):
@@ -188,13 +212,45 @@ def gen_phi3(prompt: str, max_tokens: int = None, temperature: float = None):
     payload = {
         'model': os.getenv('PHI3_MODEL', 'phi3:mini'),
         'prompt': prompt,
+        'stream': False,
         'options': {'temperature': temperature, 'num_predict': max_tokens}
     }
     t0 = time.time(); r = requests.post(f"{endpoint}/api/generate", json=payload); latency_ms = (time.time()-t0)*1000
     if not r.ok:
         return {'status_code': r.status_code, 'text': r.text[:500]}
-    data = r.json(); text = data.get('response') or data.get('generated_text') or data.get('text') or ''
-    return {'model': 'phi3', 'text': text.strip(), 'raw': data, 'latency_ms': round(latency_ms,2)}
+    
+    # Parse non-streaming response (stream: false)
+    try:
+        data = r.json()
+        final_text = data.get('response', '')
+        return {'model': 'phi3', 'text': final_text.strip(), 'raw': data, 'latency_ms': round(latency_ms,2)}
+    except json.JSONDecodeError:
+        return {'error': 'Invalid JSON response', 'text': r.text[:500]}
+
+@app.get('/generate/llama')
+def gen_llama(prompt: str, max_tokens: int = None, temperature: float = None):
+    endpoint = os.getenv('MODEL_LLAMA_ENDPOINT')
+    if not endpoint:
+        return {'error': 'LLAMA endpoint not configured'}
+    if max_tokens is None: max_tokens = GEN_MAX_TOKENS_DEFAULT
+    if temperature is None: temperature = GEN_TEMP_DEFAULT
+    payload = {
+        'model': os.getenv('LLAMA_MODEL', 'llama3.2:3b'),
+        'prompt': prompt,
+        'stream': False,
+        'options': {'temperature': temperature, 'num_predict': max_tokens}
+    }
+    t0 = time.time(); r = requests.post(f"{endpoint}/api/generate", json=payload); latency_ms = (time.time()-t0)*1000
+    if not r.ok:
+        return {'status_code': r.status_code, 'text': r.text[:500]}
+    
+    # Parse non-streaming response (stream: false)
+    try:
+        data = r.json()
+        final_text = data.get('response', '')
+        return {'model': 'llama', 'text': final_text.strip(), 'raw': data, 'latency_ms': round(latency_ms,2)}
+    except json.JSONDecodeError:
+        return {'error': 'Invalid JSON response', 'text': r.text[:500]}
 
 if __name__ == '__main__':
     import uvicorn

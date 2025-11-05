@@ -1,0 +1,36 @@
+{
+  "test_info": {
+    "timestamp": "2025-11-04T14:57:46-08:00",
+    "host": "gpu-cluster",
+    "script_version": "1.0"
+  },
+  "service_health": {
+    "api_gateway": {
+      "status": "healthy",
+      "code": 200
+    },
+    "ollama": {
+      "status": "healthy",
+      "code": 200
+    },
+    "mistral_vllm": {
+      "status": "healthy",
+      "code": 200
+    },
+    "llama_vllm": {
+      "status": "healthy",
+      "code": 200
+    },
+    "ray_dashboard": {
+      "status": "healthy",
+      "code": 200
+    }
+  },
+  "model_tests": [],
+  "performance_summary": {
+    "total_tests": 0,
+    "successful_tests": 0,
+    "healthy_services": 5,
+    "total_services": 5
+  }
+}

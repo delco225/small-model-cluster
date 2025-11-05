@@ -28,6 +28,7 @@ usage(){
 Usage: $0 [-p cpu|gpu|all] [-a action] [args]
 Actions:
   build            Build api-gateway image
+  pull             Pre-pull all service images (except local build) for faster startup
   up               Start services for selected profile (cpu/gpu/all)
   down             Stop all services
   restart          Recreate services for profile
@@ -56,6 +57,21 @@ shift $((OPTIND-1))
 build_api(){
   echo "[build] api-gateway image";
   docker compose -f "$COMPOSE_FILE" build api-gateway;
+}
+
+pull_images(){
+  echo "[pull] Fetching remote images";
+  local images=(
+    "vllm/vllm-openai:latest"
+    "ollama/ollama:latest"
+    "rayproject/ray:latest-py311"
+    "nginx:alpine"
+  );
+  for img in "${images[@]}"; do
+    echo "Pulling $img";
+    docker pull "$img" || echo "Failed to pull $img";
+  done
+  echo "[pull] Done.";
 }
 
 up_profile(){
@@ -109,6 +125,7 @@ raw_curl(){
 
 case "$ACTION" in
   build) build_api;;
+  pull) pull_images;;
   up) up_profile;;
   down) down_all;;
   restart) restart_profile;;

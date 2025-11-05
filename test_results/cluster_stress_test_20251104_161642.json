@@ -1,0 +1,1901 @@
+{
+  "timestamp": "20251104_161642",
+  "test_results": [
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 5,
+      "response_length": 34,
+      "total_duration": 2.9796292781829834,
+      "tokens_per_second": 11.410815516195237,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 5,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 5,
+      "response_length": 14,
+      "total_duration": 0.3720564842224121,
+      "tokens_per_second": 37.62869508714414,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 5,
+      "response_length": 34,
+      "total_duration": 4.40027117729187,
+      "tokens_per_second": 7.726796515510475,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 5,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 5,
+      "response_length": 14,
+      "total_duration": 0.8646423816680908,
+      "tokens_per_second": 16.191665244295372,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 5,
+      "response_length": 34,
+      "total_duration": 1.5614910125732422,
+      "tokens_per_second": 21.774060642187155,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 5,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 5,
+      "response_length": 14,
+      "total_duration": 0.6178188323974609,
+      "tokens_per_second": 22.660364601824554,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 5,
+      "response_length": 26,
+      "total_duration": 1.0233771800994873,
+      "tokens_per_second": 25.40607754950371,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 5,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 5,
+      "response_length": 26,
+      "total_duration": 0.5733973979949951,
+      "tokens_per_second": 45.34377046515119,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 5,
+      "response_length": 36,
+      "total_duration": 3.4050087928771973,
+      "tokens_per_second": 10.57265992243749,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 5,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 5,
+      "response_length": 14,
+      "total_duration": 0.818615198135376,
+      "tokens_per_second": 17.10205238296198,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 5,
+      "response_length": 24,
+      "total_duration": 1.959470510482788,
+      "tokens_per_second": 12.24820678423311,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 5,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 5,
+      "response_length": 17,
+      "total_duration": 1.0891482830047607,
+      "tokens_per_second": 15.608526649006976,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 5,
+      "response_length": 23,
+      "total_duration": 2.354851722717285,
+      "tokens_per_second": 9.767069314011877,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 5,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 5,
+      "response_length": 14,
+      "total_duration": 0.3448672294616699,
+      "tokens_per_second": 40.595332939733616,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 5,
+      "response_length": 114,
+      "total_duration": 7.0427634716033936,
+      "tokens_per_second": 16.186827863757028,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 5,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 5,
+      "response_length": 14,
+      "total_duration": 0.5837030410766602,
+      "tokens_per_second": 23.984798801418822,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 5,
+      "response_length": 34,
+      "total_duration": 1.4761478900909424,
+      "tokens_per_second": 23.03292253319234,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 5,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 5,
+      "response_length": 14,
+      "total_duration": 0.827782154083252,
+      "tokens_per_second": 16.912662263786842,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 16,
+      "response_length": 138,
+      "total_duration": 17.588236331939697,
+      "tokens_per_second": 7.846153383178974,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 16,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 16,
+      "response_length": 144,
+      "total_duration": 7.84917140007019,
+      "tokens_per_second": 18.345885528593794,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 16,
+      "response_length": 146,
+      "total_duration": 11.863805294036865,
+      "tokens_per_second": 12.306338175777746,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 16,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 16,
+      "response_length": 150,
+      "total_duration": 5.279194116592407,
+      "tokens_per_second": 28.413427634447622,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 16,
+      "response_length": 140,
+      "total_duration": 6.093008756637573,
+      "tokens_per_second": 22.977153913899674,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 16,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 16,
+      "response_length": 138,
+      "total_duration": 2.685356616973877,
+      "tokens_per_second": 51.38982253891922,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 16,
+      "response_length": 277,
+      "total_duration": 23.744231462478638,
+      "tokens_per_second": 11.665991398278099,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 16,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 16,
+      "response_length": 302,
+      "total_duration": 10.679514408111572,
+      "tokens_per_second": 28.278439305313114,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 16,
+      "response_length": 284,
+      "total_duration": 35.505757570266724,
+      "tokens_per_second": 7.998702729774386,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 16,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 16,
+      "response_length": 295,
+      "total_duration": 15.919434785842896,
+      "tokens_per_second": 18.530808660514918,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 16,
+      "response_length": 295,
+      "total_duration": 11.965758800506592,
+      "tokens_per_second": 24.653680967354166,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 16,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 16,
+      "response_length": 290,
+      "total_duration": 5.39374852180481,
+      "tokens_per_second": 53.76594752752075,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 16,
+      "response_length": 388,
+      "total_duration": 54.04437279701233,
+      "tokens_per_second": 7.179285833463301,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 16,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 16,
+      "response_length": 391,
+      "total_duration": 6.978769779205322,
+      "tokens_per_second": 56.02706671383039,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 16,
+      "response_length": 450,
+      "total_duration": 18.181524753570557,
+      "tokens_per_second": 24.750399435648394,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 16,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 16,
+      "response_length": 427,
+      "total_duration": 15.15852427482605,
+      "tokens_per_second": 28.168968974712413,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 16,
+      "response_length": 400,
+      "total_duration": 36.120341300964355,
+      "tokens_per_second": 11.07409248066326,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 16,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 16,
+      "response_length": 449,
+      "total_duration": 23.195485591888428,
+      "tokens_per_second": 19.357214929659307,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 41,
+      "response_length": 134,
+      "total_duration": 18.084164142608643,
+      "tokens_per_second": 7.409797817764692,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 41,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 41,
+      "response_length": 142,
+      "total_duration": 2.7769620418548584,
+      "tokens_per_second": 51.13501656117409,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 41,
+      "response_length": 127,
+      "total_duration": 6.443320035934448,
+      "tokens_per_second": 19.710335555539686,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 41,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 41,
+      "response_length": 141,
+      "total_duration": 8.046451091766357,
+      "tokens_per_second": 17.523253219581512,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 41,
+      "response_length": 131,
+      "total_duration": 12.287952423095703,
+      "tokens_per_second": 10.660848568536139,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 41,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 41,
+      "response_length": 155,
+      "total_duration": 5.397790431976318,
+      "tokens_per_second": 28.715453471810523,
+      "temperature": 0.1,
+      "max_tokens": 200,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 41,
+      "response_length": 276,
+      "total_duration": 23.98373556137085,
+      "tokens_per_second": 11.507798661878864,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 41,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 41,
+      "response_length": 297,
+      "total_duration": 5.429210662841797,
+      "tokens_per_second": 54.70408470842833,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 41,
+      "response_length": 288,
+      "total_duration": 12.106093406677246,
+      "tokens_per_second": 23.78967271482892,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 41,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 41,
+      "response_length": 274,
+      "total_duration": 10.78743052482605,
+      "tokens_per_second": 25.399931834501277,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 41,
+      "response_length": 278,
+      "total_duration": 35.85141110420227,
+      "tokens_per_second": 7.75422755863059,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 41,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 41,
+      "response_length": 270,
+      "total_duration": 16.111252546310425,
+      "tokens_per_second": 16.758473571431395,
+      "temperature": 0.7,
+      "max_tokens": 400,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 41,
+      "response_length": 374,
+      "total_duration": 54.39234447479248,
+      "tokens_per_second": 6.875967631314846,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 41,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 41,
+      "response_length": 393,
+      "total_duration": 24.803552389144897,
+      "tokens_per_second": 15.844504602977505,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 41,
+      "response_length": 377,
+      "total_duration": 36.36114025115967,
+      "tokens_per_second": 10.368211706121519,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 41,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 41,
+      "response_length": 435,
+      "total_duration": 16.64309549331665,
+      "tokens_per_second": 26.136964735597562,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Mistral-7B",
+      "prompt_length": 41,
+      "response_length": 397,
+      "total_duration": 18.29988121986389,
+      "tokens_per_second": 21.694129881513664,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": true,
+      "error": ""
+    },
+    {
+      "model": "Llama-3.2-3B",
+      "prompt_length": 41,
+      "response_length": 0,
+      "total_duration": 0,
+      "tokens_per_second": 0,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": false,
+      "error": "HTTP 500"
+    },
+    {
+      "model": "Phi-3-Mini",
+      "prompt_length": 41,
+      "response_length": 416,
+      "total_duration": 8.404613256454468,
+      "tokens_per_second": 49.4966261154879,
+      "temperature": 1.0,
+      "max_tokens": 600,
+      "success": true,
+      "error": ""
+    }
+  ],
+  "gpu_statistics": [
+    {
+      "prompt_type": "short",
+      "parameters": {
+        "temperature": 0.1,
+        "max_tokens": 200
+      },
+      "before": {
+        "timestamp": "2025-11-04T16:12:13.196088",
+        "nvidia_gpus": [
+          {
+            "index": 0,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 51.0,
+            "utilization": 5.0,
+            "memory_used": 3157,
+            "memory_total": 4096,
+            "power_draw": 4.99
+          },
+          {
+            "index": 1,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 51.0,
+            "utilization": 0.0,
+            "memory_used": 2982,
+            "memory_total": 4096,
+            "power_draw": 6.87
+          },
+          {
+            "index": 2,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.4
+          },
+          {
+            "index": 3,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.57
+          }
+        ],
+        "amd_gpus": [
+          {
+            "index": "card0",
+            "temp": "47.0",
+            "power": "49.0",
+            "utilization": "46.0",
+            "memory_used": "4.0",
+            "memory_total": "0"
+          }
+        ]
+      },
+      "after": {
+        "timestamp": "2025-11-04T16:12:24.267526",
+        "nvidia_gpus": [
+          {
+            "index": 0,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 53.0,
+            "utilization": 2.0,
+            "memory_used": 3156,
+            "memory_total": 4096,
+            "power_draw": 21.05
+          },
+          {
+            "index": 1,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 53.0,
+            "utilization": 0.0,
+            "memory_used": 2982,
+            "memory_total": 4096,
+            "power_draw": 21.48
+          },
+          {
+            "index": 2,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.48
+          },
+          {
+            "index": 3,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.7
+          }
+        ],
+        "amd_gpus": [
+          {
+            "index": "card0",
+            "temp": "47.0",
+            "power": "49.0",
+            "utilization": "46.0",
+            "memory_used": "4.0",
+            "memory_total": "0"
+          }
+        ]
+      }
+    },
+    {
+      "prompt_type": "short",
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 400
+      },
+      "before": {
+        "timestamp": "2025-11-04T16:12:26.444590",
+        "nvidia_gpus": [
+          {
+            "index": 0,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 53.0,
+            "utilization": 0.0,
+            "memory_used": 3156,
+            "memory_total": 4096,
+            "power_draw": 21.05
+          },
+          {
+            "index": 1,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 53.0,
+            "utilization": 0.0,
+            "memory_used": 2982,
+            "memory_total": 4096,
+            "power_draw": 21.46
+          },
+          {
+            "index": 2,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.59
+          },
+          {
+            "index": 3,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.54
+          }
+        ],
+        "amd_gpus": [
+          {
+            "index": "card0",
+            "temp": "47.0",
+            "power": "49.0",
+            "utilization": "46.0",
+            "memory_used": "4.0",
+            "memory_total": "0"
+          }
+        ]
+      },
+      "after": {
+        "timestamp": "2025-11-04T16:12:37.296621",
+        "nvidia_gpus": [
+          {
+            "index": 0,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 54.0,
+            "utilization": 2.0,
+            "memory_used": 3156,
+            "memory_total": 4096,
+            "power_draw": 21.06
+          },
+          {
+            "index": 1,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 54.0,
+            "utilization": 0.0,
+            "memory_used": 2982,
+            "memory_total": 4096,
+            "power_draw": 21.47
+          },
+          {
+            "index": 2,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.35
+          },
+          {
+            "index": 3,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.5
+          }
+        ],
+        "amd_gpus": [
+          {
+            "index": "card0",
+            "temp": "47.0",
+            "power": "49.0",
+            "utilization": "46.0",
+            "memory_used": "4.0",
+            "memory_total": "0"
+          }
+        ]
+      }
+    },
+    {
+      "prompt_type": "short",
+      "parameters": {
+        "temperature": 1.0,
+        "max_tokens": 600
+      },
+      "before": {
+        "timestamp": "2025-11-04T16:12:39.436728",
+        "nvidia_gpus": [
+          {
+            "index": 0,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 54.0,
+            "utilization": 0.0,
+            "memory_used": 3156,
+            "memory_total": 4096,
+            "power_draw": 21.06
+          },
+          {
+            "index": 1,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 54.0,
+            "utilization": 0.0,
+            "memory_used": 2982,
+            "memory_total": 4096,
+            "power_draw": 21.53
+          },
+          {
+            "index": 2,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.44
+          },
+          {
+            "index": 3,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.47
+          }
+        ],
+        "amd_gpus": [
+          {
+            "index": "card0",
+            "temp": "47.0",
+            "power": "48.0",
+            "utilization": "46.0",
+            "memory_used": "4.0",
+            "memory_total": "0"
+          }
+        ]
+      },
+      "after": {
+        "timestamp": "2025-11-04T16:12:50.722850",
+        "nvidia_gpus": [
+          {
+            "index": 0,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 56.0,
+            "utilization": 1.0,
+            "memory_used": 3156,
+            "memory_total": 4096,
+            "power_draw": 21.06
+          },
+          {
+            "index": 1,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 55.0,
+            "utilization": 2.0,
+            "memory_used": 2982,
+            "memory_total": 4096,
+            "power_draw": 21.56
+          },
+          {
+            "index": 2,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.3
+          },
+          {
+            "index": 3,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.58
+          }
+        ],
+        "amd_gpus": [
+          {
+            "index": "card0",
+            "temp": "46.0",
+            "power": "48.0",
+            "utilization": "46.0",
+            "memory_used": "5.0",
+            "memory_total": "0"
+          }
+        ]
+      }
+    },
+    {
+      "prompt_type": "medium",
+      "parameters": {
+        "temperature": 0.1,
+        "max_tokens": 200
+      },
+      "before": {
+        "timestamp": "2025-11-04T16:12:52.866021",
+        "nvidia_gpus": [
+          {
+            "index": 0,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 56.0,
+            "utilization": 0.0,
+            "memory_used": 3156,
+            "memory_total": 4096,
+            "power_draw": 21.3
+          },
+          {
+            "index": 1,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 55.0,
+            "utilization": 0.0,
+            "memory_used": 2982,
+            "memory_total": 4096,
+            "power_draw": 21.51
+          },
+          {
+            "index": 2,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.45
+          },
+          {
+            "index": 3,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.57
+          }
+        ],
+        "amd_gpus": [
+          {
+            "index": "card0",
+            "temp": "47.0",
+            "power": "49.0",
+            "utilization": "46.0",
+            "memory_used": "5.0",
+            "memory_total": "0"
+          }
+        ]
+      },
+      "after": {
+        "timestamp": "2025-11-04T16:13:10.643396",
+        "nvidia_gpus": [
+          {
+            "index": 0,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 61.0,
+            "utilization": 46.0,
+            "memory_used": 3156,
+            "memory_total": 4096,
+            "power_draw": 53.82
+          },
+          {
+            "index": 1,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 61.0,
+            "utilization": 51.0,
+            "memory_used": 2982,
+            "memory_total": 4096,
+            "power_draw": 74.1
+          },
+          {
+            "index": 2,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.37
+          },
+          {
+            "index": 3,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.7
+          }
+        ],
+        "amd_gpus": [
+          {
+            "index": "card0",
+            "temp": "47.0",
+            "power": "49.0",
+            "utilization": "48.0",
+            "memory_used": "4.0",
+            "memory_total": "0"
+          }
+        ]
+      }
+    },
+    {
+      "prompt_type": "medium",
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 400
+      },
+      "before": {
+        "timestamp": "2025-11-04T16:13:12.790997",
+        "nvidia_gpus": [
+          {
+            "index": 0,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 58.0,
+            "utilization": 0.0,
+            "memory_used": 3156,
+            "memory_total": 4096,
+            "power_draw": 21.07
+          },
+          {
+            "index": 1,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 58.0,
+            "utilization": 0.0,
+            "memory_used": 2982,
+            "memory_total": 4096,
+            "power_draw": 21.82
+          },
+          {
+            "index": 2,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.38
+          },
+          {
+            "index": 3,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.57
+          }
+        ],
+        "amd_gpus": [
+          {
+            "index": "card0",
+            "temp": "47.0",
+            "power": "49.0",
+            "utilization": "46.0",
+            "memory_used": "4.0",
+            "memory_total": "0"
+          }
+        ]
+      },
+      "after": {
+        "timestamp": "2025-11-04T16:13:48.481348",
+        "nvidia_gpus": [
+          {
+            "index": 0,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 62.0,
+            "utilization": 47.0,
+            "memory_used": 3156,
+            "memory_total": 4096,
+            "power_draw": 67.42
+          },
+          {
+            "index": 1,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 60.0,
+            "utilization": 52.0,
+            "memory_used": 2982,
+            "memory_total": 4096,
+            "power_draw": 59.61
+          },
+          {
+            "index": 2,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.41
+          },
+          {
+            "index": 3,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.62
+          }
+        ],
+        "amd_gpus": [
+          {
+            "index": "card0",
+            "temp": "49.0",
+            "power": "50.0",
+            "utilization": "48.0",
+            "memory_used": "4.0",
+            "memory_total": "0"
+          }
+        ]
+      }
+    },
+    {
+      "prompt_type": "medium",
+      "parameters": {
+        "temperature": 1.0,
+        "max_tokens": 600
+      },
+      "before": {
+        "timestamp": "2025-11-04T16:13:50.658773",
+        "nvidia_gpus": [
+          {
+            "index": 0,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 59.0,
+            "utilization": 0.0,
+            "memory_used": 3148,
+            "memory_total": 4096,
+            "power_draw": 21.23
+          },
+          {
+            "index": 1,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 57.0,
+            "utilization": 0.0,
+            "memory_used": 2982,
+            "memory_total": 4096,
+            "power_draw": 21.63
+          },
+          {
+            "index": 2,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.39
+          },
+          {
+            "index": 3,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.52
+          }
+        ],
+        "amd_gpus": [
+          {
+            "index": "card0",
+            "temp": "48.0",
+            "power": "50.0",
+            "utilization": "48.0",
+            "memory_used": "4.0",
+            "memory_total": "0"
+          }
+        ]
+      },
+      "after": {
+        "timestamp": "2025-11-04T16:14:44.892502",
+        "nvidia_gpus": [
+          {
+            "index": 0,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 63.0,
+            "utilization": 47.0,
+            "memory_used": 3146,
+            "memory_total": 4096,
+            "power_draw": 73.01
+          },
+          {
+            "index": 1,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 58.0,
+            "utilization": 52.0,
+            "memory_used": 2982,
+            "memory_total": 4096,
+            "power_draw": 72.47
+          },
+          {
+            "index": 2,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.32
+          },
+          {
+            "index": 3,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.84
+          }
+        ],
+        "amd_gpus": [
+          {
+            "index": "card0",
+            "temp": "50.0",
+            "power": "51.0",
+            "utilization": "50.0",
+            "memory_used": "4.0",
+            "memory_total": "0"
+          }
+        ]
+      }
+    },
+    {
+      "prompt_type": "long",
+      "parameters": {
+        "temperature": 0.1,
+        "max_tokens": 200
+      },
+      "before": {
+        "timestamp": "2025-11-04T16:14:47.062682",
+        "nvidia_gpus": [
+          {
+            "index": 0,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 59.0,
+            "utilization": 0.0,
+            "memory_used": 3146,
+            "memory_total": 4096,
+            "power_draw": 22.01
+          },
+          {
+            "index": 1,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 55.0,
+            "utilization": 0.0,
+            "memory_used": 2982,
+            "memory_total": 4096,
+            "power_draw": 21.55
+          },
+          {
+            "index": 2,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.31
+          },
+          {
+            "index": 3,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.53
+          }
+        ],
+        "amd_gpus": [
+          {
+            "index": "card0",
+            "temp": "50.0",
+            "power": "51.0",
+            "utilization": "50.0",
+            "memory_used": "4.0",
+            "memory_total": "0"
+          }
+        ]
+      },
+      "after": {
+        "timestamp": "2025-11-04T16:15:05.338350",
+        "nvidia_gpus": [
+          {
+            "index": 0,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 63.0,
+            "utilization": 47.0,
+            "memory_used": 3146,
+            "memory_total": 4096,
+            "power_draw": 66.38
+          },
+          {
+            "index": 1,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 58.0,
+            "utilization": 51.0,
+            "memory_used": 2982,
+            "memory_total": 4096,
+            "power_draw": 70.08
+          },
+          {
+            "index": 2,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.41
+          },
+          {
+            "index": 3,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.65
+          }
+        ],
+        "amd_gpus": [
+          {
+            "index": "card0",
+            "temp": "50.0",
+            "power": "52.0",
+            "utilization": "50.0",
+            "memory_used": "4.0",
+            "memory_total": "0"
+          }
+        ]
+      }
+    },
+    {
+      "prompt_type": "long",
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 400
+      },
+      "before": {
+        "timestamp": "2025-11-04T16:15:07.483653",
+        "nvidia_gpus": [
+          {
+            "index": 0,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 59.0,
+            "utilization": 0.0,
+            "memory_used": 3146,
+            "memory_total": 4096,
+            "power_draw": 21.12
+          },
+          {
+            "index": 1,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 55.0,
+            "utilization": 0.0,
+            "memory_used": 2982,
+            "memory_total": 4096,
+            "power_draw": 21.55
+          },
+          {
+            "index": 2,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.34
+          },
+          {
+            "index": 3,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.56
+          }
+        ],
+        "amd_gpus": [
+          {
+            "index": "card0",
+            "temp": "50.0",
+            "power": "51.0",
+            "utilization": "50.0",
+            "memory_used": "4.0",
+            "memory_total": "0"
+          }
+        ]
+      },
+      "after": {
+        "timestamp": "2025-11-04T16:15:43.520316",
+        "nvidia_gpus": [
+          {
+            "index": 0,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 63.0,
+            "utilization": 46.0,
+            "memory_used": 3146,
+            "memory_total": 4096,
+            "power_draw": 67.29
+          },
+          {
+            "index": 1,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 58.0,
+            "utilization": 51.0,
+            "memory_used": 2982,
+            "memory_total": 4096,
+            "power_draw": 71.36
+          },
+          {
+            "index": 2,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.31
+          },
+          {
+            "index": 3,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 38.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.69
+          }
+        ],
+        "amd_gpus": [
+          {
+            "index": "card0",
+            "temp": "51.0",
+            "power": "52.0",
+            "utilization": "52.0",
+            "memory_used": "4.0",
+            "memory_total": "0"
+          }
+        ]
+      }
+    },
+    {
+      "prompt_type": "long",
+      "parameters": {
+        "temperature": 1.0,
+        "max_tokens": 600
+      },
+      "before": {
+        "timestamp": "2025-11-04T16:15:45.686871",
+        "nvidia_gpus": [
+          {
+            "index": 0,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 59.0,
+            "utilization": 0.0,
+            "memory_used": 3146,
+            "memory_total": 4096,
+            "power_draw": 23.13
+          },
+          {
+            "index": 1,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 55.0,
+            "utilization": 0.0,
+            "memory_used": 2982,
+            "memory_total": 4096,
+            "power_draw": 21.5
+          },
+          {
+            "index": 2,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 37.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.39
+          },
+          {
+            "index": 3,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 38.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.67
+          }
+        ],
+        "amd_gpus": [
+          {
+            "index": "card0",
+            "temp": "51.0",
+            "power": "52.0",
+            "utilization": "50.0",
+            "memory_used": "4.0",
+            "memory_total": "0"
+          }
+        ]
+      },
+      "after": {
+        "timestamp": "2025-11-04T16:16:40.267947",
+        "nvidia_gpus": [
+          {
+            "index": 0,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 63.0,
+            "utilization": 46.0,
+            "memory_used": 3146,
+            "memory_total": 4096,
+            "power_draw": 70.56
+          },
+          {
+            "index": 1,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 58.0,
+            "utilization": 52.0,
+            "memory_used": 2982,
+            "memory_total": 4096,
+            "power_draw": 70.38
+          },
+          {
+            "index": 2,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 38.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.43
+          },
+          {
+            "index": 3,
+            "name": "NVIDIA GeForce GTX 1650 SUPER",
+            "temp": 38.0,
+            "utilization": 0.0,
+            "memory_used": 6,
+            "memory_total": 4096,
+            "power_draw": 8.76
+          }
+        ],
+        "amd_gpus": [
+          {
+            "index": "card0",
+            "temp": "51.0",
+            "power": "53.0",
+            "utilization": "52.0",
+            "memory_used": "4.0",
+            "memory_total": "0"
+          }
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "Mistral-7B": {
+      "avg_tokens_per_second": 14.383267594636864,
+      "min_tokens_per_second": 6.875967631314846,
+      "max_tokens_per_second": 25.40607754950371,
+      "std_dev": 6.650820565127201,
+      "successful_requests": 27
+    },
+    "Phi-3-Mini": {
+      "avg_tokens_per_second": 30.51925033591945,
+      "min_tokens_per_second": 15.608526649006976,
+      "max_tokens_per_second": 56.02706671383039,
+      "std_dev": 14.303734006639123,
+      "successful_requests": 27
+    },
+    "cluster_total": {
+      "total_tokens_per_second": 44.902517930556314,
+      "total_successful_requests": 54,
+      "total_failed_requests": 27,
+      "success_rate": 66.66666666666666
+    }
+  }
+}

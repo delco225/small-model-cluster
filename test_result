@@ -1,0 +1,65 @@
+GPU Model Benchmark Results
+===========================
+Timestamp: 2025-11-04T14:52:06-08:00
+Test Mode: quick
+Host: gpu-cluster
+GPU Info: NVIDIA GeForce GTX 1650 SUPER, 4096
+NVIDIA GeForce GTX 1650 SUPER, 4096
+NVIDIA GeForce GTX 1650 SUPER, 4096
+NVIDIA GeForce GTX 1650 SUPER, 4096
+
+Test Results:
+[14:52:06] Starting GPU Model Benchmark - Mode: quick
+[INFO] Results will be saved to: test_result
+[14:52:06] Checking cluster health and service availability...
+[INFO] ✓ API Gateway is healthy: {"status":"ok","stories":0,"recent_requests":4}
+[14:52:06] Testing mistral endpoint availability...
+[WARN] ✗ mistral endpoint is not available (HTTP: 500)
+[14:52:09] Testing llama endpoint availability...
+[WARN] ✗ llama endpoint is not available (HTTP: 500)
+[14:52:10] Testing phi3 endpoint availability...
+[INFO] ✓ phi3 endpoint is available
+[INFO] Available models: phi3
+AVAILABLE_MODELS=phi3
+[14:52:10] Checking GPU status and utilization...
+[INFO] GPU Status:
+GPU_STATUS_BEFORE_TESTS:
+0, NVIDIA GeForce GTX 1650 SUPER, 21 %, 344 MiB, 4096 MiB
+1, NVIDIA GeForce GTX 1650 SUPER, 0 %, 6 MiB, 4096 MiB
+2, NVIDIA GeForce GTX 1650 SUPER, 0 %, 6 MiB, 4096 MiB
+3, NVIDIA GeForce GTX 1650 SUPER, 0 %, 6 MiB, 4096 MiB
+
+[14:52:10] Running quick benchmark (single test per model)...
+[14:52:10] Testing phi3 with quick_test prompt (max_tokens=256, temp=0.7)
+[ERROR] phi3 response parsing failed: JSON parse failed: Expecting ',' delimiter: line 1 column 30 (char 29
+TEST_RESULT:
+  Model: phi3
+  Prompt_Type: quick_test
+  Status: FAILED
+  Error: JSON parsing failed
+  Raw_Response: {"status_code":500,"text":"{\"error\":\"model requires more system memory than is currently availabl
+  Wall_Time: .135528236
+  Timestamp: 2025-11-04T14:52:11-08:00
+
+[WARN] Quick test failed for phi3
+GPU_STATUS_AFTER_TESTS:
+0, NVIDIA GeForce GTX 1650 SUPER, 21 %, 344 MiB, 4096 MiB
+1, NVIDIA GeForce GTX 1650 SUPER, 0 %, 6 MiB, 4096 MiB
+2, NVIDIA GeForce GTX 1650 SUPER, 0 %, 6 MiB, 4096 MiB
+3, NVIDIA GeForce GTX 1650 SUPER, 0 %, 6 MiB, 4096 MiB
+
+[14:52:11] Generating benchmark summary...
+[INFO] SUMMARY:
+Total Tests: 1
+Successful: 0
+Failed: 1
+
+Results by Model:
+  phi3: 0 success, 1 failed
+SUMMARY:
+Total Tests: 1
+Successful: 0
+Failed: 1
+
+Results by Model:
+  phi3: 0 success, 1 failed
