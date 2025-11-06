@@ -1,14 +1,18 @@
 # GPU cluster compose file - STRICT GPU ONLY
 # Updated for hardware inventory:
 #   - 4 x NVIDIA GTX 1650 SUPER (Turing, 4GB VRAM each -> ~16GB aggregate)
-#   - 1 x AMD RX 6700 XT (RDNA2, 12GB VRAM; no official ROCm support, limited acceleration)
+#   - 1 x AMD RX 6700 XT (RDNA2, 12GB VRAM; ROCm support enabled)
+#   - Total: 5 GPUs (4 NVIDIA + 1 AMD)
 #
 # Strategy:
 #   - Run ALL models STRICTLY on GPUs - NO CPU FALLBACK
-#   - Run a quantized 8B class model (Llama 3 8B Instruct) under vLLM using all four NVIDIA GPUs.
-#   - Keep Mistral 7B as lighter option on NVIDIA GPUs.
-#   - Run Phi-3 Mini via Ollama on AMD GPU with strict GPU acceleration.
-#   - Expose new LLAMA model endpoint to api-gateway for selection (prefer=llama).
+#   - 3-Node Ray Cluster Architecture:
+#     * Node 1 (Head): NVIDIA GPUs 0,1 (ray-head)
+#     * Node 2 (Worker): NVIDIA GPUs 2,3 (ray-worker-nvidia)  
+#     * Node 3 (Worker): AMD GPU (ray-worker-amd)
+#   - Run Mistral 7B and Llama 3.2 3B on dedicated NVIDIA GPU pairs via Ollama
+#   - Run Phi-3 Mini via Ollama on AMD GPU with ROCm acceleration
+#   - Ray cluster provides unified compute orchestration across heterogeneous GPUs
 #
 # IMPORTANT:
 # 1. Host GPU drivers (NVIDIA) + nvidia-container-toolkit must be installed on the Linux host (preferred) or WSL2.
@@ -124,29 +128,66 @@ services:
     group_add:
       - video
 
-  # Ray Head for coordination (GPU cluster only)
+  # Ray Head for coordination (NVIDIA Node 1: GPUs 0,1)
   ray-head:
     image: rayproject/ray:latest-py311
     container_name: ray-head
     profiles: [gpu]  # <-- GPU ONLY - NO CPU PROFILE
-    command: ["bash","-c","ray start --head --port=6379 --dashboard-host=0.0.0.0 --dashboard-port=8265 && tail -f /dev/null"]
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=0,1  # First two NVIDIA GPUs
+    command: ["bash","-c","ray start --head --port=6379 --dashboard-host=0.0.0.0 --dashboard-port=8265 --num-gpus=2 --resources='{\"NVIDIA_GPU\": 2}' && tail -f /dev/null"]
     ports:
       - "8265:8265"
     volumes:
       - ray-data:/data
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["0", "1"]
+              capabilities: [gpu]
 
-  # Ray Worker (can be scaled) - GPU cluster only
-  ray-worker:
+  # Ray Worker Node 1 (NVIDIA Node 2: GPUs 2,3)
+  ray-worker-nvidia:
     image: rayproject/ray:latest-py311
-    container_name: ray-worker
+    container_name: ray-worker-nvidia
     profiles: [gpu]  # <-- GPU ONLY - NO CPU PROFILE
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=2,3  # Last two NVIDIA GPUs
     depends_on:
       - ray-head
-    command: ["bash","-c","ray start --address=ray-head:6379 && tail -f /dev/null"]
+    command: ["bash","-c","ray start --address=ray-head:6379 --num-gpus=2 --resources='{\"NVIDIA_GPU\": 2}' && tail -f /dev/null"]
     volumes:
       - ray-data:/data
     deploy:
-      replicas: 1
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["2", "3"]
+              capabilities: [gpu]
+
+  # Ray Worker Node 2 (AMD Node: AMD GPU)
+  ray-worker-amd:
+    image: rayproject/ray:latest-py311
+    container_name: ray-worker-amd
+    profiles: [gpu]  # <-- GPU ONLY - NO CPU PROFILE
+    devices:
+      - /dev/dri:/dev/dri  # Enable AMD GPU access
+      - /dev/kfd:/dev/kfd  # Enable ROCm kernel fusion driver
+    environment:
+      - HSA_OVERRIDE_GFX_VERSION=10.3.0  # AMD GPU compatibility
+      - ROC_ENABLE_PRE_VEGA=1
+    depends_on:
+      - ray-head
+    command: ["bash","-c","ray start --address=ray-head:6379 --num-gpus=0 --resources='{\"AMD_GPU\": 1}' && tail -f /dev/null"]
+    volumes:
+      - ray-data:/data
+    group_add:
+      - video
 
   # Simple storage service (NFS placeholder using local volume export via nginx)
   storage:
